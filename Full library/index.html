@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html  x-data="darkMode" :class="{'dark' : darkMode}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="new.css">
+    <!-- boootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- map css-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <!-- map js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+</head>
+<!-- ------------------------switch -->
+<body class="dark-bg-body-dark">
+    <div class="d-flex align-items-center justify-content-start p-4 ">
+        <i class="bi bi-brightness-high-fill fs-3 me-3 dark-text-white "
+            style="line-height: 0%;    margin-left: 4px;   "></i>
+        <div class="form-check form-switch">
+            <input x-model="darkMode" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
+                style="width: 2.5rem ; height: 1.5rem;">
+        </div>
+        <i class="bi bi-moon-stars-fill fs-3 ms-3 dark-text-white " style="line-height: 0%; margin-right: 4px;"></i>
+    </div>
+    <!-- -----------------------animated text------------------------ -->
+
+    <div class="row text-center  dark-text-white ">
+        <h2><span class="text-primary">in the name of Allah</span><span id="myname" class="mx-2"></span></h2>
+    </div>
+
+<!-- --------------------------------------------------------- -->
+<div class="container my-5 ">
+    <div class="row">
+        <div  id="map" class="col-md-6 offset-md-3 p-5 "  style= " height: 400px;" >
+            
+        </div>
+    </div>
+</div>
+<!-- animation library -->
+  <!-- -------------------------------------------------------------------- -->
+
+    <!-- -------------------------------------------------------------- -->
+    <div class="container mt-5" style="margin-top: 100px!important; overflow: hidden;">
+        <div class="row   align-items-center">
+            <div class="col-md-6 " data-aos="fade-up" data-aos-delay="600">
+                <h3 class="text-primary my-3" data-aos="fade-up" data-aos-delay="600">يازي به اين راهنما نخواهيد داشت. پس از فراخواني فايل يا متن موردنظر
+                </h3>
+                <p class="mb-3">اين راهنما نخواهيد داشت. پس</p>
+                <button class="btn btn-primary btn-lg">اين راهنما</button>
+            </div>
+            <div class="col-md-6"data-aos="zoom-out" data-aos-delay="800">
+                <img src="Resources/images/intro/intro-img.png" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+
+<!-- animation library -->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<!--  -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+
+
+
+     <!-- -----------------------------animated text -->
+    <script src="https://unpkg.com/ityped@1.0.3"></script>
+    <script>
+        const oneElement = document.querySelector('#myname');
+        ityped.init(oneElement, { strings: ['my name is jaweed', 'my last name is sediqi'] });
+    </script>
+<!-- dark/light -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('darkMode', () => ({
+                darkMode: false,
+                init() {
+
+                    if (localStorage.theme === 'dark') {
+                        this.darkMode = true;
+                    } else {
+                        this.darkMode = false;
+                    }
+
+                    this.$watch('darkMode', (value) => {
+                        if (value) {
+                            localStorage.theme = 'dark';
+                        } else {
+                            localStorage.theme = 'light';
+                        }
+                    })
+                }
+            }))
+        })
+    </script>
+
+    <!-- map -->
+    <script>
+        const map = L.map('map').setView([34.3522, 62.2047], 13);
+
+const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+const marker = L.marker([34.3522, 62.2047]).addTo(map);
+
+    </script>
+</body>
+</html>
